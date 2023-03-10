@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+use strict;
+use locale;
+
+my ( @forma, @categoria, @lema );
+
+while ( my $line = <STDIN> )
+   {
+   chomp $line;
+   my @t = split ( /\t/, $line );
+   push ( @forma, $t[0] );
+   push ( @lema, $t[0] );
+   push ( @categoria, $t[1] );
+   }
+
+for ( my $i = 0 ; $i <= ($#forma - 2) ; $i++ )
+   {
+      if (
+         ($categoria[$i] eq "N") and
+         ($categoria[$i+1] eq "Prep") and
+         ($categoria[$i+2] eq "N") and
+         ($forma[$i] eq $forma[$i+2])
+         )
+      {
+      print $forma[$i], " ", $forma[$i+1], " ", $forma[$i+2], "\n";
+      }
+   }
